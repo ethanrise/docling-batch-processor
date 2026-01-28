@@ -1,0 +1,12 @@
+requests>=2.25.0
+pathlib
+typing
+concurrent.futures
+threading
+time
+json
+re
+base64
+mimetypes
+datetime
+argparse
