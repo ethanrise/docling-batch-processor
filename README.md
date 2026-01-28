@@ -32,8 +32,8 @@ A powerful document conversion tool that can batch convert various document form
 
 ### 1. Clone the Project
 
-bash
-git clone https://github.com/your-repo/docling-batch-converter.git
+```bash
+git clone https://github.com/ethanrise/docling-batch-processor.git
 cd docling-batch-converter
 ```
 
