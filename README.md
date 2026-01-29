@@ -38,7 +38,7 @@
 ## ⚙️ System Requirements
 
 - Python 3.9+
-- Running [Docling-serve](https://github.com/dlredding/docling-serve) instance (local or remote)
+- Running [Docling-serve](https://github.com/docling-project/docling-serve) instance (local or remote)
 
 ---
 
