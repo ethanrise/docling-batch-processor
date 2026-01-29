@@ -59,7 +59,7 @@ pip install -r requirements.txt
 
 #### Using Docker (Recommended)
 ```bash
-docker run -p 9969:9969 ghcr.io/dlredding/docling-serve:latest
+docker run -p 9969:5001 quay.io/docling-project/docling-serve:latest
 ```
 
 #### Using Docker Compose
@@ -68,9 +68,9 @@ Create `docker-compose.yml`:
 version: '3.8'
 services:
   docling-serve:
-    image: ghcr.io/dlredding/docling-serve:latest
+    image: quay.io/docling-project/docling-serve:latest
     ports:
-      - "9969:9969"
+      - "9969:5001"
     volumes:
       - ./uploads:/app/uploads
 ```
