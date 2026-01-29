@@ -38,7 +38,7 @@
 ## ⚙️ System Requirements
 
 - Python 3.9+
-- Running [Docling-serve](https://github.com/docling-project/docling-serve) instance (local or remote)
+- Running [Docling-serve](https://github.com/ethanrise/PrivAI-Stack/tree/main/docling) instance (local or remote)
 
 ---
 
@@ -57,25 +57,11 @@ pip install -r requirements.txt
 
 ### 3. Start Docling-serve Service
 
-#### Using Docker (Recommended)
-```bash
-docker run -p 9969:5001 quay.io/docling-project/docling-serve:latest
-```
-
 #### Using Docker Compose
-Create `docker-compose.yml`:
-```yaml
-version: '3.8'
-services:
-  docling-serve:
-    image: quay.io/docling-project/docling-serve:latest
-    ports:
-      - "9969:5001"
-    volumes:
-      - ./uploads:/app/uploads
-```
-Then run:
+
 ```bash
+git clone https://github.com/ethanrise/PrivAI-Stack.git
+cd PrivAI-Stack/docling
 docker-compose up -d
 ```
 
