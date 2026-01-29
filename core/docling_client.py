@@ -69,6 +69,8 @@ class DoclingClient:
                 data = {
                     'output_format': 'markdown',
                     'image_mode': 'base64',
+                    'do_formula_enrichment': 'true',
+                    'do_ocr': 'true'
                 }
                 
                 # 发送请求
