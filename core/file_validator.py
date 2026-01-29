@@ -1,3 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+'''
+@File    :   file_validator.py
+@Time    :   2026/01/29 10:27:20
+@Author  :   Ethan
+@Email   :   ethanrise.ai@gmail.com
+@Version :   1.0
+@Desc    :   
+@Note    :   None
+'''
+
+# ---------------------- Third-party Library Imports ----------------------
+
+
 """
 文件验证器模块
 负责验证输入文件的有效性

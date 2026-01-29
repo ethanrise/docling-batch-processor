@@ -1,3 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+'''
+@File    :   docling_client.py
+@Time    :   2026/01/29 10:27:15
+@Author  :   Ethan
+@Email   :   ethanrise.ai@gmail.com
+@Version :   1.0
+@Desc    :   
+@Note    :   None
+'''
+
+# ---------------------- Third-party Library Imports ----------------------
+
+
 """
 Docling客户端模块
 负责与Docling服务通信

@@ -1,3 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+'''
+@File    :   table_processor.py
+@Time    :   2026/01/29 10:28:00
+@Author  :   Ethan
+@Email   :   ethanrise.ai@gmail.com
+@Version :   1.0
+@Desc    :   
+@Note    :   None
+'''
+
+# ---------------------- Third-party Library Imports ----------------------
+
+
 """
 表格处理器模块
 负责优化表格格式

@@ -1,3 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+'''
+@File    :   image_processor.py
+@Time    :   2026/01/29 10:27:25
+@Author  :   Ethan
+@Email   :   ethanrise.ai@gmail.com
+@Version :   1.0
+@Desc    :   
+@Note    :   None
+'''
+
+# ---------------------- Third-party Library Imports ----------------------
+
+
 """
 图片处理器模块
 负责处理和保存图片

@@ -1,3 +1,19 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+'''
+@File    :   batch_converter.py
+@Time    :   2026/01/29 10:27:09
+@Author  :   Ethan
+@Email   :   ethanrise.ai@gmail.com
+@Version :   1.0
+@Desc    :   
+@Note    :   None
+'''
+
+# ---------------------- Third-party Library Imports ----------------------
+
+
+
 """
 批量转换器模块
 主控制器类，协调各组件工作
