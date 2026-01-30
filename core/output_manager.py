@@ -72,6 +72,7 @@ class OutputManager:
                     f.write(f"✓ {result['input_file']} -> {result['output_file']}\n")
                     f.write(f"  处理时间: {result.get('duration', 0):.2f}秒\n")
                     f.write(f"  图片数量: {result.get('image_count', 0)}\n\n")
+                    f.write(f"  公式数量: {result.get('formula_count', 0)}\n\n")
             
             if failed:
                 f.write("转换失败的文件:\n")

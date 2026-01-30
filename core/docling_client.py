@@ -70,7 +70,7 @@ class DoclingClient:
                     'output_format': 'markdown',
                     'image_mode': 'base64',
                     'do_formula_enrichment': 'true',
-                    'do_ocr': 'true'
+                    'do_ocr': 'true' 
                 }
                 
                 # 发送请求
@@ -78,7 +78,7 @@ class DoclingClient:
                     self.service_url,
                     files=files,
                     data=data,
-                    timeout=300  # 5分钟超时
+                    timeout=1000  # 5分钟超时
                 )
 
                 response.raise_for_status()

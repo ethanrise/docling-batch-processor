@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 '''
-@File    :   main.py
+@File    :   batch_convert.py
 @Time    :   2026/01/29 10:26:51
 @Author  :   Ethan
 @Email   :   ethanrise.ai@gmail.com
@@ -56,16 +56,16 @@ def main():
         epilog="""
 示例用法:
   # 转换多个文件
-  python main.py file1.pdf file2.docx file3.txt
+  python batch_convert.py file1.pdf file2.docx file3.txt
   
   # 转换目录中的所有支持文件
-  python main.py -d /path/to/documents
+  python batch_convert.py -d /path/to/documents
   
   # 转换文件到指定目录
-  python main.py file1.pdf file2.docx -o ./output
+  python batch_convert.py file1.pdf file2.docx -o ./output
   
   # 指定并发数和Docling服务地址
-  python main.py -d ./docs --workers 5 --url http://localhost:9969/v1/convert/file
+  python batch_convert.py -d ./docs --workers 5 --url http://localhost:9969/v1/convert/file
   
 支持的文件格式:
   .pdf, .docx, .doc, .txt, .pptx, .html, .xml, .xlsx, .xls

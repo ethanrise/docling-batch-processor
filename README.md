@@ -11,7 +11,8 @@
 
 ## ✨ Features
 
-- ✅ **Batch Processing** – Convert multiple documents in one command  
+- ✅ **Batch Conversion** – Convert PDF, Word, Excel, PPT, and more to clean Markdown  
+- ✅ **Batch Chunking** – Process Markdown files into Dify-ready formats  
 - 🔄 **Concurrent Execution** – Multi-threaded for faster throughput  
 - 🔍 **Auto Discovery** – Recursively scan directories for supported files  
 - 🖼️ **Smart Image Handling** – Extract images as files + embed Base64 fallback  
@@ -24,6 +25,7 @@
 
 ## 📁 Supported File Formats
 
+### Conversion (batch_convert)
 | Format        | Extensions                     |
 |---------------|--------------------------------|
 | PDF           | `.pdf`                         |
@@ -33,12 +35,17 @@
 | Plain Text    | `.txt`                         |
 | Web Documents | `.html`, `.xml`                |
 
+### Chunking (batch_chunk)
+| Format        | Extensions                     |
+|---------------|--------------------------------|
+| Markdown      | `.md`                          |
+
 ---
 
 ## ⚙️ System Requirements
 
 - Python 3.9+
-- Running [Docling-serve](https://github.com/ethanrise/PrivAI-Stack/tree/main/docling) instance (local or remote)
+- Running [Docling-serve](https://github.com/docling-project/docling-serve) instance (local or remote)
 
 ---
 
@@ -57,11 +64,25 @@ pip install -r requirements.txt
 
 ### 3. Start Docling-serve Service
 
-#### Using Docker Compose
-
+#### Using Docker (Recommended)
 ```bash
-git clone https://github.com/ethanrise/PrivAI-Stack.git
-cd PrivAI-Stack/docling
+docker run -p 9969:5001 quay.io/docling-project/docling-serve:latest
+```
+
+#### Using Docker Compose
+Create `docker-compose.yml`:
+```yaml
+version: '3.8'
+services:
+  docling-serve:
+    image: quay.io/docling-project/docling-serve:latest
+    ports:
+      - "9969:5001"
+    volumes:
+      - ./uploads:/app/uploads
+```
+Then run:
+```bash
 docker-compose up -d
 ```
 
@@ -71,29 +92,44 @@ docker-compose up -d
 
 ## ▶️ Usage
 
-### Basic Examples
+### Part 1: Batch Conversion (batch_convert.py)
+Convert various document formats to Markdown:
+
 ```bash
 # Convert specific files
-python main.py file1.pdf file2.docx
+python batch_convert.py file1.pdf file2.docx
 
 # Convert all supported files in a directory
-python main.py -d /path/to/documents
+python batch_convert.py -d /path/to/documents
 
 # Specify custom output directory
-python main.py file1.pdf -o ./results
-```
+python batch_convert.py file1.pdf -o ./results
 
-### Advanced Options
-```bash
 # Increase concurrency & use custom service URL
-python main.py -d ./docs --workers 5 --url http://remote-server:9969/v1/convert/file
-
-# Show help
-python main.py -h
+python batch_convert.py -d ./docs -o ./results --workers 5 --url http://remote-server:9969/v1/convert/file
 ```
+
+### Part 2: Batch Chunking (batch_chunk.py)
+Process Markdown files into Dify-ready format:
+
+```bash
+# Process all Markdown files in a directory
+python batch_chunk.py -d /path/to/markdown/files
+
+# Specify custom output directory
+python batch_chunk.py -d ./markdown_files -o ./dify_ready
+
+# Use custom API endpoint
+python batch_chunk.py -d ./docs --url http://remote-server:9969/v1/chunk/hybrid/source
+```
+
+
+
 
 ### 📌 Command-Line Arguments
 
+
+#### batch_convert.py
 | Argument / Flag       | Description                          | Default                              |
 |-----------------------|--------------------------------------|--------------------------------------|
 | `input_files`         | List of input file paths             | *(required if `-d` not used)*        |
@@ -102,10 +138,18 @@ python main.py -h
 | `--workers`           | Number of concurrent workers         | `3`                                  |
 | `--url`               | Docling service endpoint             | `http://localhost:9969/v1/convert/file` |
 
+#### batch_chunk.py
+| Argument / Flag       | Description                          | Default                              |
+|-----------------------|--------------------------------------|--------------------------------------|
+| `-d`, `--directory`   | Input directory containing Markdown files | *(required)*                      |
+| `-o`, `--output`      | Output directory                     | `{input_dir}/../dify_ready`          |
+| `--url`               | Document chunking service endpoint   | `http://127.0.0.1:9969/v1/chunk/hybrid/source` |
+
 ---
 
 ## 📂 Output Structure
 
+### After Conversion (batch_convert.py)
 Each converted file generates:
 
 ```
@@ -115,6 +159,15 @@ output/
 │   ├── image_20260129_001.png
 │   └── image_20260129_002.jpg
 └── conversion_report.txt       # Summary report
+```
+
+### After Chunking (batch_chunk.py)
+Each Markdown file generates a processed version:
+
+```
+output/
+├── document_processed.txt      # Clean, chunked content ready for Dify
+└── processing_report.txt       # Summary report
 ```
 
 ---
@@ -141,7 +194,8 @@ Example snippet:
 
 ```
 docling-batch-processor/
-├── main.py                     # CLI entry point
+├── batch_convert.py            # CLI entry point for conversion
+├── batch_chunk.py              # CLI entry point for chunking
 ├── core/
 │   ├── batch_converter.py      # Orchestrates the full pipeline
 │   ├── docling_client.py       # HTTP client for Docling API
@@ -157,6 +211,7 @@ docling-batch-processor/
 - **`docling_client`**: Wraps API calls to Docling-serve  
 - **`image_processor` / `table_processor`**: Post-process conversion results  
 - **`output_manager`**: Handles file I/O and report generation  
+- **`markdown_processor`**: Main controller for chunking pipeline  
 
 ---
 
@@ -172,7 +227,7 @@ docling-batch-processor/
 - Extension must match actual format (e.g., don’t rename `.zip` to `.docx`)
 
 ### 💥 Out of Memory
-- Reduce concurrency: `--workers 1`
+- Reduce concurrency( batch_convert.py): `--workers 1`
 - Process smaller batches
 
 ---

@@ -28,6 +28,7 @@ from .file_validator import FileValidator
 from .docling_client import DoclingClient
 from .image_processor import ImageProcessor
 from .table_processor import TableProcessor
+from .formula_processor import FormulaProcessor
 from .output_manager import OutputManager
 
 
@@ -46,6 +47,7 @@ class BatchConverter:
         self.client = DoclingClient(service_url)
         self.image_processor = ImageProcessor()
         self.table_processor = TableProcessor()
+        self.formula_processor = FormulaProcessor()  # 新增公式处理器
         self.output_manager = OutputManager()
         self.max_workers = max_workers
         self.lock = threading.Lock()
@@ -68,6 +70,7 @@ class BatchConverter:
             'status': 'pending',
             'error': '',
             'image_count': 0,
+            'formula_count': 0, 
             'duration': 0
         }
         
@@ -99,7 +102,11 @@ class BatchConverter:
             # 5. 处理表格格式
             markdown_content = self.table_processor.process_tables(markdown_content)
             
-            # 6. 保存Markdown文件
+            # 6. 处理数学公式（新增步骤）
+            markdown_content, formula_count = self.formula_processor.process_formulas(markdown_content)
+            result['formula_count'] = formula_count
+            
+            # 7. 保存Markdown文件
             self.output_manager.save_markdown(markdown_content, output_file)
             
             result['status'] = 'success'
